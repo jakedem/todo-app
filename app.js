@@ -91,3 +91,25 @@ function getTodos() {
   const todos = localStorage.getItem("todos") || "[]";
   return JSON.parse(todos);
 }
+
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+
+  // Save theme preference in localStorage
+  if (body.classList.contains("light-mode")) {
+    localStorage.setItem("theme", "light");
+  } else {
+    localStorage.setItem("theme", "dark");
+  }
+});
+
+// Check saved theme on page load
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    body.classList.add("light-mode");
+  }
+});
